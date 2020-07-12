@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		body {
+			margin-top: 20px;
+		}
+
+		#t2,
+		#t3 {
+			margin-top: -20px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="offset-3 col-6">
+		<table class="table text-center align-middle">
+			<thead class="table-success">
+				<tr>
+					<th scope="col">
+						توزيع الاحتياج المائي خلال السنة بناء على وزارة البيئة والمياه والزراعة ( لتر / نخلة / يوم )
+
+					</th>
+
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+	<div class="offset-3 col-6">
+		<table id="t2" class="table text-center">
+			<thead>
+				<tr class="align-middle">
+					<th scope="col" class="align-middle">200</th>
+
+					<th scope="col" class="align-middle">مايو<br>
+						يونيو<br>
+						يوليه<br>
+						أغسطس</th>
+					<th scope="col" class="align-middle">170</th>
+					<th scope="col" class="align-middle">مارس<br>
+						أبريل<br>
+						سبتمبر<br>
+						أكتوبر<br></th>
+					<th scope="col" class="align-middle">150</th>
+					<th scope="col" class="align-middle">
+						ديسمبر<br>
+						يناير<br>
+						فبراير<br>
+						نوفمبر<br>
+					</th>
+				</tr>
+			</thead>
+		</table>
+
+		<table id="t3" class="table text-center align-middle">
+			<thead class="table-primary">
+				<tr>
+					<th scope="col">
+						اعلى استهلاك
+					</th>
+					<th scope="col">
+						الاستهلاك المتوسط
+					</th>
+					<th scope="col">
+						اقل استهلاك
+					</th>
+				</tr>
+			</thead>
+
+		</table>
+	</div>
+	<div class="offset-2 col-8 mt-5">
+		<div class="row">
+			<table class="col-5 table text-center align-middle">
+				<thead>
+					<tr>
+						<th scope="col" class="table-primary">
+							يوم
+						</th>
+
+						<th scope="col">
+							<input class="form-control text-center font-weight-bold" type="text" id="days" value="3.5">
+						</th>
+						<th scope="col" class="table-warning">
+							جدولة ري كل
+						</th>
+					</tr>
+
+				</thead>
+			</table>
+			<table class="offset-2 col-5 table text-center align-middle">
+				<thead>
+					<tr>
+						<th scope="col" class="table-primary">
+							m<sup>2</sup>
+						</th>
+
+						<th scope="col">
+							<input class="form-control text-center font-weight-bold" type="text" id="area" value="2000">
+						</th>
+						<th scope="col" class="table-warning">
+							المساحة 
+						</th>
+					</tr>
+
+				</thead>
+			</table>
+		</div>
+	</div>
+	<div class="offset-5 col-2 text-center">
+		<button onclick="fn()" class="btn btn-success btn-lg"> احسب</button>
+	</div>
+	<div class="offset-md-2 offset-sm-1 col-md-8 col-sm-10 mt-5">
+		<div class="row">
+			<table class="col-12 table text-center align-middle">
+				<thead>
+					<tr>
+						<th scope="col" class="table-danger">
+							متوسط الكمية الشهرية m3
+						</th>
+						<th scope="col" class="table-danger">
+							عدد الريات في الشهر
+						</th>
+						<th scope="col">
+							متوسط الاستهلاك
+						</th>
+						<th scope="col" class="table-warning">
+							اعلى استهلاك م3/رية
+						</th>
+						<th scope="col" class="table-primary">
+							الاستهلاك المتوسط م3/رية
+						</th>
+						<th scope="col" class="table-info">
+							اقل استهلاك م3/رية
+						</th>
+						<th scope="col" class="table-active">
+							نظام الغرس (المسافة بين النخيل)
+						</th>
+						<th scope="col" class="table-active">
+							نظام الري
+						</th>
+					</tr>
+
+				</thead>
+				<tbody>
+					<tr>
+						<td  id="1,6">
+							663.2<br>
+							428.0<br>
+							288.9
+						</td>
+						<td class="align-middle"  id="1,5">
+							8.6
+						</td>
+						<td  id="1,4">
+							77.38<br>
+							49.93<br>
+							33.71
+						</td>
+						<td  id="1,3">
+							89.0<br>
+							57.4<br>
+							38.7
+						</td>
+						<td  id="1,2">
+							75.9<br>
+							49.0<br>
+							33.1
+						</td>
+						<td id="1,1">
+							67.3<br>
+							43.4<br>
+							29.3
+						</td>
+						<td>4×4<br>5×5<br>6×6</td>
+						<th scope="row">الري حديث (شبكة ري فوارات ) </th>
+					</tr>
+					<tr>
+						<td  id="2,6">718.5<br>
+							464.0<br>
+							313.2</td>
+						<td  id="2,5" class="align-middle">8.6</td>
+						<td  id="2,4">83.83<br>54.13<br>36.54</td>
+						<td  id="2,3">95.4<br>61.6<br>41.6</td>
+						<td  id="2,2">82.4<br>53.2<br>35.9</td>
+						<td  id="2,1"> 73.7<br>47.6<br>32.1</td>
+						<td>4×4<br>5×5<br>6×6</td>
+						<th scope="row">الري حديث (شبكة ري فوارات ) </th>
+					</tr>
+					<tr>
+						<td  id="3,6">767.7<br>
+							496.0<br>
+							334.8</td>
+						<td  id="3,5" class="align-middle">8.6</td>
+						<td  id="3,4">89.56<br>
+							57.87<br>
+							39.06</td>
+						<td  id="3,3">112.6<br>
+							72.8<br>
+							49.1</td>
+						<td  id="3,2">82.4<br>
+							53.2<br>
+							35.9</td>
+						<td  id="3,1">73.7<br>
+							47.6<br>
+							32.1</td>
+						<td  >4×4<br>5×5<br>6×6</td>
+						<th scope="row">الري حديث (شبكة ري فوارات ) </th>
+					</tr>
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+
+	<div class="offset-4 col-4 font-weight-bold text-center mt-4">اعداد وحدة توزيع المياه وخدمات المصارف مكتب جليجلة
+	</div>
+
+
+	<script>
+		area = 0;days = 0;
+		function f14(u){ return area*u*62*days/1000000+43*0.05;}
+		function f15(u){return area*u*40*days/1000000+28*0.05;}
+		function f16(u){return area*u*27*days/1000000+18.9*0.05;}
+		function a14(){return (f14(150)+f14(170)+f14(200))/3;}
+		function a15(){return (f15(150)+f15(170)+f15(200))/3;}
+		function a16(){return (f16(150)+f16(170)+f16(200))/3;}
+
+		function f24(u){ return area*u*62*days/1000000+43*0.2;}
+		function f25(u){return area*u*40*days/1000000+28*0.2;}
+		function f26(u){return area*u*27*days/1000000+18.9*0.2;}
+		function a24(){return (f24(150)+f24(170)+f24(200))/3;}
+		function a25(){return (f25(150)+f25(170)+f25(200))/3;}
+		function a26(){return (f26(150)+f26(170)+f26(200))/3;}
+
+		function f34(u){ i=0.2; if(u==200) i =0.6; return area*u*62*days/1000000+43*i;}
+		function f35(u){  i=0.2; if(u==200) i =0.6; return area*u*40*days/1000000+28*i;}
+		function f36(u){ i=0.2; if(u==200) i =0.6;  return area*u*27*days/1000000+18.9*i;}
+		function a34(){return (f34(150)+f34(170)+f34(200))/3;}
+		function a35(){return (f35(150)+f35(170)+f35(200))/3;}
+		function a36(){return (f36(150)+f36(170)+f36(200))/3;}
+		function fn(){
+			area = parseFloat(document.getElementById('area').value);
+			days = parseFloat(document.getElementById('days').value);
+			/// Days
+			dd= (30/days);
+			sd=""+dd.toFixed(1);
+			tmp = document.getElementById('1,5');
+			tmp.innerHTML = sd;
+			tmp = document.getElementById('2,5');
+			tmp.innerHTML = sd;
+			tmp = document.getElementById('3,5');
+			tmp.innerHTML = sd;
+			// 1st row
+			tmp = document.getElementById('1,1');
+			tmp.innerHTML=f14(150).toFixed(1)+'<br>'+f15(150).toFixed(1)+'<br>'+f16(150).toFixed(1);
+			tmp = document.getElementById('1,2');
+			tmp.innerHTML=f14(170).toFixed(1)+'<br>'+f15(170).toFixed(1)+'<br>'+f16(170).toFixed(1);
+			tmp = document.getElementById('1,3');
+			tmp.innerHTML=f14(200).toFixed(1)+'<br>'+f15(200).toFixed(1)+'<br>'+f16(200).toFixed(1);
+			tmp = document.getElementById('1,4');
+			tmp.innerHTML=a14().toFixed(2)+'<br>'+a15().toFixed(2)+'<br>'+a16().toFixed(2);
+			tmp = document.getElementById('1,6');
+			tmp.innerHTML=(a14()*dd).toFixed(1)+'<br>'+(a15()*dd).toFixed(1)+'<br>'+(a16()*dd).toFixed(1);
+			// 2nd row
+			tmp = document.getElementById('2,1');
+			tmp.innerHTML=f24(150).toFixed(1)+'<br>'+f25(150).toFixed(1)+'<br>'+f26(150).toFixed(1);
+			tmp = document.getElementById('2,2');
+			tmp.innerHTML=f24(170).toFixed(1)+'<br>'+f25(170).toFixed(1)+'<br>'+f26(170).toFixed(1);
+			tmp = document.getElementById('2,3');
+			tmp.innerHTML=f24(200).toFixed(1)+'<br>'+f25(200).toFixed(1)+'<br>'+f26(200).toFixed(1);
+			tmp = document.getElementById('2,4');
+			tmp.innerHTML=a24().toFixed(2)+'<br>'+a25().toFixed(2)+'<br>'+a26().toFixed(2);
+			tmp = document.getElementById('2,6');
+			tmp.innerHTML=(a24()*dd).toFixed(1)+'<br>'+(a25()*dd).toFixed(1)+'<br>'+(a26()*dd).toFixed(1);
+			// 3rd row
+			tmp = document.getElementById('3,1');
+			tmp.innerHTML=f34(150).toFixed(1)+'<br>'+f35(150).toFixed(1)+'<br>'+f36(150).toFixed(1);
+			tmp = document.getElementById('3,2');
+			tmp.innerHTML=f34(170).toFixed(1)+'<br>'+f35(170).toFixed(1)+'<br>'+f36(170).toFixed(1);
+			tmp = document.getElementById('3,3');
+			tmp.innerHTML=f34(200).toFixed(1)+'<br>'+f35(200).toFixed(1)+'<br>'+f36(200).toFixed(1);
+			tmp = document.getElementById('3,4');
+			tmp.innerHTML=a34().toFixed(2)+'<br>'+a35().toFixed(2)+'<br>'+a36().toFixed(2);
+			tmp = document.getElementById('3,6');
+			tmp.innerHTML=(a34()*dd).toFixed(1)+'<br>'+(a35()*dd).toFixed(1)+'<br>'+(a36()*dd).toFixed(1);
+			
+
+
+		}
+	</script>
+</body>
+
+</html>
