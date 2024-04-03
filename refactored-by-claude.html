@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="agri-chem.png" type="image/icon type">
+	<title>حاسبة الاستهلاك المائي</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css">
+	<style>
+		body {
+			margin-top: 20px;
+		}
+	</style>
+</head>
+<body class="bg-gray-100">
+	<div id="app" class="mx-auto w-full max-w-5xl px-4"></div>
+
+	<script>
+		let area = 2000;
+		let days = 3.5;
+
+		function calculateWaterConsumption(u, i) {
+			const waterConsumption = (area * u * i * days) / 1000000;
+			const evaporationLoss = (i === 62) ? 43 * 0.05 : (i === 40) ? 28 * 0.05 : 18.9 * 0.05;
+			return waterConsumption + evaporationLoss;
+		}
+
+		function renderApp() {
+			const app = document.getElementById('app');
+
+			// Header
+			const header = document.createElement('div');
+			header.className = 'bg-green-200 rounded-lg py-4 px-6 mb-4';
+			header.textContent = 'توزيع الاحتياج المائي خلال السنة بناء على وزارة البيئة والمياه والزراعة ( لتر / نخلة / يوم )';
+			app.appendChild(header);
+
+			// Input Fields
+			const inputFields = document.createElement('div');
+			inputFields.className = 'flex flex-col md:flex-row justify-between mb-4';
+
+			const daysInput = document.createElement('div');
+			daysInput.className = 'mb-4 md:mb-0';
+			const daysLabel = document.createElement('label');
+			daysLabel.className = 'block text-gray-700 font-bold mb-2';
+			daysLabel.textContent = 'جدولة ري كل';
+			const daysInputField = document.createElement('input');
+			daysInputField.className = 'appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
+			daysInputField.type = 'text';
+			daysInputField.id = 'days';
+			daysInputField.value = days;
+			daysInputField.addEventListener('input', handleInput);
+			daysInput.appendChild(daysLabel);
+			daysInput.appendChild(daysInputField);
+			inputFields.appendChild(daysInput);
+
+			const areaInput = document.createElement('div');
+			areaInput.className = 'mb-4 md:mb-0';
+			const areaLabel = document.createElement('label');
+			areaLabel.className = 'block text-gray-700 font-bold mb-2';
+			areaLabel.textContent = 'المساحة';
+			const areaInputField = document.createElement('input');
+			areaInputField.className = 'appearance-none border rounded-md py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline';
+			areaInputField.type = 'text';
+			areaInputField.id = 'area';
+			areaInputField.value = area;
+			areaInputField.addEventListener('input', handleInput);
+			areaInput.appendChild(areaLabel);
+			areaInput.appendChild(areaInputField);
+			inputFields.appendChild(areaInput);
+
+			app.appendChild(inputFields);
+
+			// Consumption Table
+			const consumptionTable = document.createElement('div');
+			consumptionTable.className = 'grid grid-cols-1 md:grid-cols-3 gap-4';
+
+			const irrigationSystems = ['الري حديث (شبكة ري فوارات )', 'الري (احواض دوائر )', 'الري  سيح'];
+			const crops = [150, 170, 200];
+			const irrigationDistances = ['4×4', '5×5', '6×6'];
+
+			irrigationSystems.forEach((system, systemIndex) => {
+				const tableData = document.createElement('div');
+				tableData.className = 'bg-white rounded-lg shadow-md p-4';
+
+				const systemHeader = document.createElement('h3');
+				systemHeader.className = 'bg-gray-300 rounded-t-lg py-2 px-4 text-lg font-semibold';
+				systemHeader.textContent = system;
+				tableData.appendChild(systemHeader);
+
+				const table = document.createElement('table');
+				table.className = 'w-full text-center';
+
+				const thead = document.createElement('thead');
+				const headerRow = document.createElement('tr');
+				headerRow.className = 'bg-red-500 text-white';
+
+				const headers = ['متوسط الكمية الشهرية m3', 'عدد الريات في الشهر', 'متوسط الاستهلاك', 'اعلى استهلاك م3/رية', 'الاستهلاك المتوسط م3/رية', 'اقل استهلاك م3/رية', 'نظام الغرس (المسافة بين النخيل)'];
+				headers.forEach(header => {
+					const th = document.createElement('th');
+					th.className = 'px-4 py-2';
+					th.textContent = header;
+					headerRow.appendChild(th);
+				});
+				thead.appendChild(headerRow);
+				table.appendChild(thead);
+
+				const tbody = document.createElement('tbody');
+				crops.forEach((crop, cropIndex) => {
+					const row = document.createElement('tr');
+
+					const monthlyConsumption = calculateWaterConsumption(crop, systemIndex === 0 ? 62 : systemIndex === 1 ? 40 : 27);
+					const monthlyIrrigations = 30 / days;
+					const averageConsumption = monthlyConsumption / monthlyIrrigations;
+					const highestConsumption = calculateWaterConsumption(200, systemIndex === 0 ? 62 : systemIndex === 1 ? 40 : 27);
+					const averageConsumption2 = calculateWaterConsumption(170, systemIndex === 0 ? 62 : systemIndex === 1 ? 40 : 27);
+					const lowestConsumption = calculateWaterConsumption(150, systemIndex === 0 ? 62 : systemIndex === 1 ? 40 : 27);
+
+					const data = [
+						`${monthlyConsumption.toFixed(1)}`,
+						`${monthlyIrrigations.toFixed(1)}`,
+						`${averageConsumption.toFixed(2)}`,
+						`${highestConsumption.toFixed(1)}`,
+						`${averageConsumption2.toFixed(1)}`,
+						`${lowestConsumption.toFixed(1)}`,
+						irrigationDistances[cropIndex]
+					];
+
+					data.forEach(datum => {
+						const td = document.createElement('td');
+						td.className = 'px-4 py-2';
+						td.textContent = datum;
+						row.appendChild(td);
+					});
+
+					tbody.appendChild(row);
+				});
+				table.appendChild(tbody);
+				tableData.appendChild(table);
+				consumptionTable.appendChild(tableData);
+			});
+
+			app.appendChild(consumptionTable);
+		}
+
+		function handleInput() {
+			area = parseFloat(document.getElementById('area').value);
+			days = parseFloat(document.getElementById('days').value);
+document.getElementById('app').innerHTML = '';
+renderApp();
+}
+    </script>
+</body>
+</html>
